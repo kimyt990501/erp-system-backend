@@ -3,7 +3,9 @@
     "allow": [
       "Bash(python3 -m pip:*)",
       "Bash(docker cp:*)",
-      "Bash(docker exec:*)"
+      "Bash(docker exec:*)",
+      "Bash(source erp/bin/activate)",
+      "Bash(pip freeze:*)"
     ],
     "deny": [],
     "ask": []
