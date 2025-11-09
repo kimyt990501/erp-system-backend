@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  # 'db' 라는 이름의 서비스(컨테이너)를 정의합니다.
+  db:
+    image: mysql:8.0
+    container_name: my-erp-mysql
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+    environment:
+      MYSQL_ROOT_PASSWORD: kyt0501  # MySQL root 비밀번호 (변경 권장)
+      MYSQL_DATABASE: erp_db           # 자동으로 생성할 데이터베이스 이름
+    ports:
+      - "3306:3306"
+    volumes:
+      # 1. 초기화 스크립트 연결:
+      #    현재 폴더의 init.sql 파일을 컨테이너 내부의 초기화 폴더로 연결합니다.
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      # 2. 데이터 영속성:
+      #    컨테이너가 삭제되어도 데이터베이스 데이터는 mysql_data 볼륨에 저장됩니다.
+      - mysql_data:/var/lib/mysql
+
+volumes:
+  mysql_data:

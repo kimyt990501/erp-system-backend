@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 -m pip:*)",
+      "Bash(docker cp:*)",
+      "Bash(docker exec:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
