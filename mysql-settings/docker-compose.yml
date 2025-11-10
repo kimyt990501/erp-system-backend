@@ -12,7 +12,7 @@ services:
       MYSQL_ROOT_PASSWORD: kyt0501  # MySQL root 비밀번호 (변경 권장)
       MYSQL_DATABASE: erp_db           # 자동으로 생성할 데이터베이스 이름
     ports:
-      - "3306:3306"
+      - "33006:3306"
     volumes:
       # 1. 초기화 스크립트 연결:
       #    현재 폴더의 init.sql 파일을 컨테이너 내부의 초기화 폴더로 연결합니다.
