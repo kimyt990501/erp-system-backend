@@ -7,3 +7,9 @@ IMPLEMENTATION_GUIDE.*
 
 # env
 erp/
+
+# Python cache files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
