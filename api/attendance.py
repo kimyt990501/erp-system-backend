@@ -12,6 +12,7 @@ from schemas.attendance import (
     AttendanceCreate,
     AttendanceRead,
     AttendanceStats,
+    AttendanceReadWithUser,
 )
 from core.security import get_current_user, get_current_admin_user
 
@@ -135,7 +136,7 @@ async def get_today_attendance(
 # === 관리자 전용 엔드포인트 ===
 
 
-@router.get("/admin/all-records", response_model=List[AttendanceRead])
+@router.get("/admin/all-records", response_model=List[AttendanceReadWithUser])
 async def get_all_attendance_records_admin(
     work_date: Optional[date] = Query(None, description="특정 날짜 조회"),
     start_date: Optional[date] = Query(None, description="조회 시작일"),

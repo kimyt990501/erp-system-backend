@@ -2,6 +2,7 @@ from typing import Optional
 from datetime import date, time, datetime
 from sqlmodel.ext.asyncio.session import AsyncSession
 from sqlmodel import select, func
+from sqlalchemy.orm import selectinload
 from db.models import (
     User, LeaveBalance, LeaveRequest, SalaryStatement, Attendance
 )
@@ -290,7 +291,7 @@ async def get_all_attendances(
     start_date: Optional[date] = None,
     end_date: Optional[date] = None
 ) -> list[Attendance]:
-    statement = select(Attendance)
+    statement = select(Attendance).options(selectinload(Attendance.user))
 
     if work_date:
         statement = statement.where(Attendance.work_date == work_date)
