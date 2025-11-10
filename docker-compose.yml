@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  backend:
+    build: .
+    container_name: my-erp-backend
+    env_file:
+      - .env
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    networks:
+      - erp-net
+
+  db:
+    image: mysql:8.0
+    container_name: my-erp-mysql
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+    environment:
+      MYSQL_ROOT_PASSWORD: kyt0501
+      MYSQL_DATABASE: erp_db
+    volumes:
+      - ./mysql-settings/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - mysql_data:/var/lib/mysql
+    ports:
+      - "33006:3306"
+    networks:
+      - erp-net
+
+volumes:
+  mysql_data:
+
+networks:
+  erp-net:
+    driver: bridge
