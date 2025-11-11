@@ -20,3 +20,8 @@ class SalaryStatementRead(SQLModel):
     deductions: int
     net_pay: int
     created_at: datetime
+
+# 3. PDF 업로드 응답 데이터
+class PayslipUploadResponse(SQLModel):
+    message: str
+    salary_statement: SalaryStatementRead
