@@ -6,8 +6,10 @@ services:
       - .env
     ports:
       - "8000:8000"
+    restart: always
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     networks:
       - erp-net
 
@@ -25,6 +27,13 @@ services:
       - mysql_data:/var/lib/mysql
     ports:
       - "33006:3306"
+    restart: always
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-pkyt0501"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
     networks:
       - erp-net
 
